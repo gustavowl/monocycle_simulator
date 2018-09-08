@@ -17,40 +17,70 @@ Render::Render(Person p) {
 Render::~Render() {
 }
 
+//xyz = width, height, depth
+//lbb = leftBottomBack
+//rtf = rightTopFront
+void drawParallelepiped(float* lbb, float* rtf) {
+	glBegin(GL_QUADS);
+		//draw back clockwise: lbb, ltb, rtb, rbb
+		glColor3f(1, 0, 0); //red
+		glVertex3f(lbb[0], lbb[1], lbb[2]);
+		glVertex3f(lbb[0], rtf[1], lbb[2]);
+		glVertex3f(rtf[0], rtf[1], lbb[2]);
+		glVertex3f(rtf[0], lbb[1], lbb[2]);
+
+		//draw bottom clockwise: rbb, rbf, lbf, lbb
+		glColor3f(1, 1, 0); //yellow
+		glVertex3f(rtf[0], lbb[1], lbb[2]);
+		glVertex3f(rtf[0], lbb[1], rtf[2]);
+		glVertex3f(lbb[0], lbb[1], rtf[2]);
+		glVertex3f(lbb[0], lbb[1], lbb[2]);
+
+		//draw left clockwise: lbb, lbf, ltf, ltb
+		glColor3f(0, 1, 0); //green
+		glVertex3f(lbb[0], lbb[1], lbb[2]);
+		glVertex3f(lbb[0], lbb[1], rtf[2]);
+		glVertex3f(lbb[0], rtf[1], rtf[2]);
+		glVertex3f(lbb[0], rtf[1], lbb[2]);
+
+		//draw front anti-clockwise: ltf, lbf, rbf, rtf
+		glColor3f(0, 0, 1); //blue
+		glVertex3f(lbb[0], rtf[1], rtf[2]);
+		glVertex3f(lbb[0], lbb[1], rtf[2]);
+		glVertex3f(rtf[0], lbb[1], rtf[2]);
+		glVertex3f(rtf[0], rtf[1], rtf[2]);
+
+		//draw top clockwise: ltb, rtb, rtf, ltf
+		glColor3f(0, 1, 1); //cyan
+		glVertex3f(lbb[0], rtf[1], lbb[2]);
+		glVertex3f(rtf[0], rtf[1], lbb[2]);
+		glVertex3f(rtf[0], rtf[1], rtf[2]);
+		glVertex3f(lbb[0], rtf[1], rtf[2]);
+
+		//draw right: rtf, rtb, rbb, rbf
+		glColor3f(1, 1, 1); //white
+		glVertex3f(rtf[0], rtf[1], rtf[2]);
+		glVertex3f(rtf[0], rtf[1], lbb[2]);
+		glVertex3f(rtf[0], lbb[1], lbb[2]);
+		glVertex3f(rtf[0], lbb[1], rtf[2]);
+
+
+	glEnd();
+}
+
 void drawFoot(float* pos, int size) {
 	int dim = 1;
 	glColor3f(1, 0, 0);
 
 	glPushMatrix();
 	//glTranslatef(pos[0], pos[1], pos[2]);
-	glRotatef(45, 0, 1, 0);
+	//glRotatef(45, 0, 1, 0);
 	
-	int i = 0;
-	glBegin(GL_QUADS);
-	for (; i < 4; i++) {
-		glVertex3f(dim * cos(i*PI/2),
-				0, dim * sin(i*PI/2));
-
-	}
-
-	glColor3f(0, 1, 0);
-	i = 0;
-	for (; i < 4; i++) {
-		glVertex3f(dim * cos(i*PI/2),
-				dim * sin(i*PI/2), 0);
-
-	}
-	glEnd();
+	float bbl[3]= {-1, -1, -1};
+	float ftr[3] = {1, 1, 1};
+	drawParallelepiped(bbl, ftr);
+	
 	glPopMatrix();
-		/*glVertex3f(pos[0] + ((i+1)/2)%2 * dim,
-				pos[1], pos[2] + i/2 * dim);*/
-
-	/*glVertex3f(pos[0], pos[1], pos[2]);
-	glVertex3f(pos[0] + dim, pos[1], pos[2]);
-	glVertex3f(pos[0] + dim, pos[1], pos[2] + dim);
-	glVertex3f(pos[0], pos[1], pos[2] + dim);*/
-
-	//((i + 1)/2) % 2
 }
 
 void renderPerson() {
