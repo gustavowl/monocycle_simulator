@@ -1,7 +1,7 @@
 # Monocycle Simulator #
 This is the project of the first Unit of the course
 of Computer Graphics ministered in the second semester
-of 2018 by Professor Rafael Beserra.
+of 2018 by [Professor Rafael Beserra](http://www.dimap.ufrn.br/~rafaelbg/index.php).
 
 The project's prerequisites are:
 * Use translations
