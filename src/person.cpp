@@ -2,8 +2,8 @@
 
 Person::Person() {
 	this->tiptoe[0] = 1.0;
-	this->tiptoe[1] = 2.0;
-	this->tiptoe[2] = 3.0;
+	this->tiptoe[1] = 0.0;
+	this->tiptoe[2] = 1.0;
 }
 
 Person::~Person() {}
