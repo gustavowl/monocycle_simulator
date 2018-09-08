@@ -2,6 +2,7 @@
 
 void controllerReadCommands(unsigned char key, int x, int y) {
 	//TODO: switch case?
+	//TODO: detect multiple key pressing
 	if (key == 'q')
 		exit(-1);
 	if (key == 'd')
@@ -12,6 +13,6 @@ void controllerReadCommands(unsigned char key, int x, int y) {
 		printf("Balance forward\n");
 	if (key == 'j')
 		printf("Balance backwards\n");
-	printf("=========================");
+	printf("=========================\n");
 	glutPostRedisplay();	
 }
