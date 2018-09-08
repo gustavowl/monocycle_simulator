@@ -1,2 +1,2 @@
-g++ src/*.cpp -o monocycle_sim.out
+g++ src/*.cpp -lGL -lGLU -lglut -o monocycle_sim.out
 
