@@ -5,6 +5,7 @@
 #include <GL/glu.h>
 #include "person.h"
 #include "controller.h"
+#include "math.h"
 
 class Render {
 private:

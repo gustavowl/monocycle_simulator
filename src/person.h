@@ -3,8 +3,8 @@
 
 #include <string.h>
 
-#define LEFT 0
-#define RIGHT 1
+#define PERSON_LEFT 0
+#define PERSON_RIGHT 1
 
 class Person {
 private:

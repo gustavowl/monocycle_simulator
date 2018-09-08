@@ -1,7 +1,13 @@
 #include "render.h"
-#include "math.h"
 #include <stdio.h>
 #define PI 3.1415926535897932
+
+#define LEFT 0
+#define BHEIGHT 1
+#define BACK 2
+#define RIGHT 3
+#define FHEIGHT 4
+#define FRONT 5
 
 Person gambiarra;
 
@@ -20,50 +26,56 @@ Render::~Render() {
 //xyz = width, height, depth
 //lbb = leftBottomBack
 //rtf = rightTopFront
-void drawParallelepiped(float* lbb, float* rtf) {
+//
+//CURRENT IMPLEMENTATION:
+//Uses two rectangles: bottom and top
+//each rectangle has two points: (left, back) and (right, front)
+//expected format:
+//bottom(point1, point2) => {x1, y1, z1, x2, y2 ,z2}
+//i.e. sqrBottom[6] = {LEFT, LBHEIGHT, BACK, RIGHT, RFHEIGHT, FRONT}
+void drawParallelepiped(float* sqrBot, float* sqrTop) {
 	glBegin(GL_QUADS);
 		//draw back clockwise: lbb, ltb, rtb, rbb
-		glColor3f(1, 0, 0); //red
-		glVertex3f(lbb[0], lbb[1], lbb[2]);
-		glVertex3f(lbb[0], rtf[1], lbb[2]);
-		glVertex3f(rtf[0], rtf[1], lbb[2]);
-		glVertex3f(rtf[0], lbb[1], lbb[2]);
+		/*glColor3f(1, 0, 0); //red
+		glVertex3f(sqrBot[LEFT], sqrBot[BHEIGHT], sqrBot[BACK]);
+		glVertex3f(sqrTop[LEFT], sqrTop[BHEIGHT], sqrTop[BACK]);
+		glVertex3f(sqrTop[RIGHT], sqrTop[BHEIGHT], sqrTop[BACK]);
+		glVertex3f(sqrBot[RIGHT], sqrBot[BHEIGHT], sqrBot[BACK]);
 
 		//draw bottom clockwise: rbb, rbf, lbf, lbb
 		glColor3f(1, 1, 0); //yellow
-		glVertex3f(rtf[0], lbb[1], lbb[2]);
-		glVertex3f(rtf[0], lbb[1], rtf[2]);
-		glVertex3f(lbb[0], lbb[1], rtf[2]);
-		glVertex3f(lbb[0], lbb[1], lbb[2]);
+		glVertex3f(sqrBot[RIGHT], sqrBot[BHEIGHT], sqrBot[BACK]);
+		glVertex3f(sqrBot[RIGHT], sqrBot[FHEIGHT], sqrBot[FRONT]);
+		glVertex3f(sqrBot[LEFT], sqrBot[FHEIGHT], sqrBot[FRONT]);
+		glVertex3f(sqrBot[LEFT], sqrBot[BHEIGHT], sqrBot[BACK]);*/
 
 		//draw left clockwise: lbb, lbf, ltf, ltb
-		glColor3f(0, 1, 0); //green
-		glVertex3f(lbb[0], lbb[1], lbb[2]);
-		glVertex3f(lbb[0], lbb[1], rtf[2]);
-		glVertex3f(lbb[0], rtf[1], rtf[2]);
-		glVertex3f(lbb[0], rtf[1], lbb[2]);
-
-		//draw front anti-clockwise: ltf, lbf, rbf, rtf
-		glColor3f(0, 0, 1); //blue
-		glVertex3f(lbb[0], rtf[1], rtf[2]);
-		glVertex3f(lbb[0], lbb[1], rtf[2]);
-		glVertex3f(rtf[0], lbb[1], rtf[2]);
-		glVertex3f(rtf[0], rtf[1], rtf[2]);
-
-		//draw top clockwise: ltb, rtb, rtf, ltf
-		glColor3f(0, 1, 1); //cyan
-		glVertex3f(lbb[0], rtf[1], lbb[2]);
-		glVertex3f(rtf[0], rtf[1], lbb[2]);
-		glVertex3f(rtf[0], rtf[1], rtf[2]);
-		glVertex3f(lbb[0], rtf[1], rtf[2]);
+		//glColor3f(0, 1, 0); //green
+		glVertex3f(sqrBot[LEFT], sqrBot[BHEIGHT], sqrBot[BACK]);
+		glVertex3f(sqrBot[LEFT], sqrBot[FHEIGHT], sqrBot[FRONT]);
+		glVertex3f(sqrTop[LEFT], sqrTop[FHEIGHT], sqrTop[FRONT]);
+		glVertex3f(sqrTop[LEFT], sqrTop[BHEIGHT], sqrTop[BACK]);
 
 		//draw right: rtf, rtb, rbb, rbf
-		glColor3f(1, 1, 1); //white
-		glVertex3f(rtf[0], rtf[1], rtf[2]);
-		glVertex3f(rtf[0], rtf[1], lbb[2]);
-		glVertex3f(rtf[0], lbb[1], lbb[2]);
-		glVertex3f(rtf[0], lbb[1], rtf[2]);
+		//glColor3f(1, 1, 1); //white
+		glVertex3f(sqrTop[RIGHT], sqrTop[FHEIGHT], sqrTop[FRONT]);
+		glVertex3f(sqrTop[RIGHT], sqrTop[BHEIGHT], sqrTop[BACK]);
+		glVertex3f(sqrBot[RIGHT], sqrBot[BHEIGHT], sqrBot[BACK]);
+		glVertex3f(sqrBot[RIGHT], sqrBot[FHEIGHT], sqrBot[FRONT]);
 
+		//draw top clockwise: ltb, rtb, rtf, ltf
+		//glColor3f(0, 1, 1); //cyan
+		glVertex3f(sqrTop[LEFT], sqrTop[BHEIGHT], sqrTop[BACK]);
+		glVertex3f(sqrTop[RIGHT], sqrTop[BHEIGHT], sqrTop[BACK]);
+		glVertex3f(sqrTop[RIGHT], sqrTop[FHEIGHT], sqrTop[FRONT]);
+		glVertex3f(sqrTop[LEFT], sqrTop[FHEIGHT], sqrTop[FRONT]);
+
+		//draw front anti-clockwise: ltf, lbf, rbf, rtf
+		//glColor3f(0, 0, 1); //blue
+		glVertex3f(sqrTop[LEFT], sqrTop[FHEIGHT], sqrTop[FRONT]);
+		glVertex3f(sqrBot[LEFT], sqrBot[FHEIGHT], sqrBot[FRONT]);
+		glVertex3f(sqrBot[RIGHT], sqrBot[FHEIGHT], sqrBot[FRONT]);
+		glVertex3f(sqrTop[RIGHT], sqrTop[FHEIGHT], sqrTop[FRONT]);
 
 	glEnd();
 }
@@ -73,11 +85,13 @@ void drawFoot(float* pos, int size) {
 	glColor3f(1, 0, 0);
 
 	glPushMatrix();
-	//glTranslatef(pos[0], pos[1], pos[2]);
-	//glRotatef(45, 0, 1, 0);
+	glTranslatef(1, 1, 1);
+	//glRotatef(90, 0, 1, 0);
 	
-	float bbl[3]= {-1, -1, -1};
-	float ftr[3] = {1, 1, 1};
+	float bbl[6]= {-2, -2, -2, 0, -2, -1};
+	float ftr[6] = {-1, 0, -2, 0, 0, -1};
+	/*float bbl[6]= {-2, -2, -2, -1, -2, -1};
+	float ftr[6] = {-2, 0, -2, -1, 0, -1};*/
 	drawParallelepiped(bbl, ftr);
 	
 	glPopMatrix();
@@ -98,7 +112,7 @@ void renderDisplay() {
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 
-	gluLookAt(5.0, 2.0, 0.0, 
+	gluLookAt(0.0, 2.0, 5.0, 
 			0, 0, 0, 0, 1, 0);
 
 	glColor3f(0.7f, 0.7f, 0.7f);
