@@ -28,4 +28,7 @@ Then execute the file:
 **TODO: Create makefile**
 
 ## Executing ##
-**TODO**
+Just execute the file outputed after compilation:
+```bash
+	./monocycle_sim.out
+```
