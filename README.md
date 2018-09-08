@@ -4,9 +4,9 @@ of Computer Graphics ministered in the second semester
 of 2018 by Professor Rafael Beserra.
 
 The project's prerequisites are:
-	* Use translations
-	* Use rotations
-	* Interact with the user
+* Use translations
+* Use rotations
+* Interact with the user
 
 ## Members ##
 Name | Student ID
@@ -25,7 +25,7 @@ Then execute the file:
 	./compile.sh
 ```
 
-*TODO: Create makefile*
+**TODO: Create makefile**
 
 ## Executing ##
-*TODO*
+**TODO**
