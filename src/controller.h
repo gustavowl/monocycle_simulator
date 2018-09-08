@@ -6,12 +6,6 @@
 //FIXME: REMOVE STD OUTPUT
 #include <stdio.h>
 
-class Controller {
-public:
-	Controller();
-	~Controller();
-
-	void readCommands(unsigned char key, int x, int y);
-};
+void controllerReadCommands(unsigned char key, int x, int y);
 
 #endif

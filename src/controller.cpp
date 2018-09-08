@@ -1,12 +1,6 @@
 #include "controller.h"
 
-Controller::Controller() {
-}
-
-Controller::~Controller() {
-}
-
-void Controller::readCommands(unsigned char key, int x, int y) {
+void controllerReadCommands(unsigned char key, int x, int y) {
 	//TODO: switch case?
 	if (key == 'q')
 		exit(-1);
