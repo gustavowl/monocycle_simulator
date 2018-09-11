@@ -85,15 +85,25 @@ void drawFoot(float* pos, int size) {
 	glColor3f(1, 0, 0);
 
 	glPushMatrix();
-	glTranslatef(1, 1, 1);
+	//glTranslatef(1, 1, 1);
 	//glRotatef(90, 0, 1, 0);
 	
 	float bbl[6]= {-2, -2, -2, 0, -2, -1};
-	float ftr[6] = {-1, 0, -2, 0, 0, -1};
-	/*float bbl[6]= {-2, -2, -2, -1, -2, -1};
-	float ftr[6] = {-2, 0, -2, -1, 0, -1};*/
+	float ftr[6] = {-1, -1.5, -2, 0, -1.5, -1};
 	drawParallelepiped(bbl, ftr);
 	
+	glPopMatrix();
+}
+
+void drawKnee(float* pos, int size) {
+	glColor3f(0, 1, 0);
+
+	glPushMatrix();
+	//glTranslatef(1, 1, 1);
+	float bot[6]= {-2, -2, -2, -1, -2, -1};
+	//float top[6] = {-2, 2, -2, -1, 2, -1};
+	float top[6] = {-1, 2, -2, 0, 2, -1};
+	drawParallelepiped(bot, top);
 	glPopMatrix();
 }
 
@@ -101,7 +111,9 @@ void renderPerson() {
 	int size;
 	float* vec = gambiarra.getArticulations(&size);
 
+	glTranslatef(1, 0, 1);
 	drawFoot(vec, size);
+	drawKnee(vec, size);
 	delete vec;
 }
 
