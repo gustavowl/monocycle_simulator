@@ -81,35 +81,44 @@ void drawParallelepiped(float* sqrBot, float* sqrTop) {
 }
 
 void drawFoot(float* pos, int size) {
-	int dim = 1;
 	glColor3f(1, 0, 0);
-
 	glPushMatrix();
-	//glTranslatef(1, 1, 1);
-	//glRotatef(90, 0, 1, 0);
+
+	float bot[6] = {pos[ANKLEX], pos[ANKLEY], pos[ANKLEZ] - FOOT_DEPTH,
+		pos[TIPTOEX], pos[TIPTOEY], pos[TIPTOEZ]};
 	
-	float bbl[6]= {-2, -2, -2, 0, -2, -1};
-	float ftr[6] = {-1, -1.5, -2, 0, -1.5, -1};
-	drawParallelepiped(bbl, ftr);
+	float top[6] = {pos[ANKLEX], pos[ANKLEY] + FOOT_HEIGHT,
+		pos[ANKLEZ] - FOOT_DEPTH,
+		pos[TIPTOEX], pos[TIPTOEY] + FOOT_HEIGHT, pos[TIPTOEZ]};
+
+	drawParallelepiped(bot, top);
 	
 	glPopMatrix();
 }
 
 void drawKnee(float* pos, int size) {
 	glColor3f(0, 1, 0);
-
 	glPushMatrix();
-	//glTranslatef(1, 1, 1);
-	float bot[6]= {-2, -2, -2, -1, -2, -1};
-	//float top[6] = {-2, 2, -2, -1, 2, -1};
-	float top[6] = {-1, 2, -2, 0, 2, -1};
+
+	float bot[6] = {pos[ANKLEX], pos[ANKLEY], pos[ANKLEZ] - CALF_DEPTH,
+		pos[ANKLEX] + CALF_WIDTH, pos[ANKLEY], pos[ANKLEZ]};
+
+	float top[6] = {pos[KNEEX] - CALF_WIDTH, pos[KNEEY],
+		pos[KNEEZ] - CALF_DEPTH,
+		pos[KNEEX], pos[KNEEY], pos[KNEEZ]};
+
 	drawParallelepiped(bot, top);
+
 	glPopMatrix();
 }
 
 void renderPerson() {
 	int size;
 	float* vec = gambiarra.getArticulations(&size);
+	for (int i = 0; i < size; i++) {
+		printf("%f, ", vec[i]);
+	}
+	printf("\n");
 
 	glTranslatef(1, 0, 1);
 	drawFoot(vec, size);

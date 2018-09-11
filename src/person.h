@@ -5,6 +5,20 @@
 
 #define PERSON_LEFT 0
 #define PERSON_RIGHT 1
+#define FOOT_DEPTH 1.0f
+#define FOOT_HEIGHT 0.5f
+#define CALF_DEPTH 1.0f
+#define CALF_WIDTH 1.0f
+
+#define TIPTOEX 0
+#define TIPTOEY 1
+#define TIPTOEZ 2
+#define ANKLEX 3
+#define ANKLEY 4
+#define ANKLEZ 5
+#define KNEEX 6
+#define KNEEY 7
+#define KNEEZ 8
 
 class Person {
 private:
