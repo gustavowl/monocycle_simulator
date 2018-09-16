@@ -178,7 +178,7 @@ void renderDisplay() {
 int time = 0;
 void timer() {
 	if (++time == 2112 * 3) {
-		printf("Body angle = %f\n", gambiarra->getBodyAngle());
+		//printf("Body angle = %f\n", gambiarra->getBodyAngle());
 		gambiarra->gravity();
 		glutPostRedisplay();
 		time = 0;

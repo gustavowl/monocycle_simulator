@@ -46,47 +46,52 @@ float Person::sinDegrees(float degrees) {
 }
 
 void Person::updatePosition(int angle_increase) {
-	//updates foot angle relatively to pedal
-	this->foot_angle += angle_increase;
-	//may be moving forward or backward
-	while (this->foot_angle < 0)
-		this->foot_angle += 360;
-	this->foot_angle = this->foot_angle % 360;
+	if (!this->game_over) {
+		//updates foot angle relatively to pedal
+		this->foot_angle += angle_increase;
+		//may be moving forward or backward
+		while (this->foot_angle < 0)
+			this->foot_angle += 360;
+		this->foot_angle = this->foot_angle % 360;
 
-	//updates body angle simulating inertia.
-	//If person moves forward the angle increases.
-	//The angle decreases otherwise.
-	//2 indicates the "speed proportion"
-	this->body_angle -= angle_increase / 2.0;
-	/*while(this->body_angle < 0)
-		this->body_angle += 360.0;
-	while(this->body_angle >= 360)
-		this->body_angle -= 360.0;*/
+		//updates body angle simulating inertia.
+		//If person moves forward the angle increases.
+		//The angle decreases otherwise.
+		//2 indicates the "speed proportion"
+		this->body_angle -= angle_increase / 2.0;
+		/*while(this->body_angle < 0)
+			this->body_angle += 360.0;
+		while(this->body_angle >= 360)
+			this->body_angle -= 360.0;*/
 
-	this->actual = this->initial;
+		this->actual = this->initial;
 
-	this->actual.tiptoe[0] += cosDegrees(this->foot_angle);
-	this->actual.tiptoe[1] += sinDegrees(this->foot_angle);
-	
-	this->actual.ankle[0] += cosDegrees(this->foot_angle);
-	this->actual.ankle[1] += sinDegrees(this->foot_angle);
-	
-	//calculate calf height using Pythagoras
-	float calf_height = sqrt(pow(this->initial.ankle[0] -
-					this->initial.knee[0], 2) +
-				pow(this->initial.ankle[1] -
-					this->initial.knee[1], 2)
-			);
-	//calculate knee height using Pythagoras
-	this->actual.knee[1] = sqrt(pow(calf_height,2) - pow(
-				this->actual.ankle[0] - this->actual.knee[0] ,2)) +
-				this->actual.ankle[1];
+		this->actual.tiptoe[0] += cosDegrees(this->foot_angle);
+		this->actual.tiptoe[1] += sinDegrees(this->foot_angle);
+		
+		this->actual.ankle[0] += cosDegrees(this->foot_angle);
+		this->actual.ankle[1] += sinDegrees(this->foot_angle);
+		
+		//calculate calf height using Pythagoras
+		float calf_height = sqrt(pow(this->initial.ankle[0] -
+						this->initial.knee[0], 2) +
+					pow(this->initial.ankle[1] -
+						this->initial.knee[1], 2)
+				);
+		//calculate knee height using Pythagoras
+		this->actual.knee[1] = sqrt(pow(calf_height,2) - pow(
+					this->actual.ankle[0] - this->actual.knee[0] ,2)) +
+					this->actual.ankle[1];
+
+		this->checkGameOver();
+	}
 }
 
 void Person::updateBodyAngle(float angle_increase) {
-	printf("angle_incr: %f / ", angle_increase);
-	this->body_angle += angle_increase;
-	printf("update ba: %f\n", this->body_angle);
+	if (!this->game_over) {
+		this->body_angle += angle_increase;
+		this->checkGameOver();
+	}
 }
 
 float Person::getBodyAngle() {
@@ -96,6 +101,14 @@ float Person::getBodyAngle() {
 void Person::gravity() {
 	//printf("cos(%f) = %f\n", this->body_angle, cosDegrees(this->body_angle));
 	//printf("cos(%f) = %f\n", this->body_angle, cosDegrees(getBodyAngle()));
-	this->body_angle -= cosDegrees(this->body_angle);
+	if (!this->game_over) {
+		this->body_angle -= cosDegrees(this->body_angle);
+		this->checkGameOver();
+	}
 	//printf("%f\n================\n", getBodyAngle());
+}
+
+void Person::checkGameOver() {
+	this->game_over = this->body_angle >= 180 ||
+		this->body_angle <= 0;
 }

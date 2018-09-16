@@ -42,6 +42,7 @@ private:
 
 	int foot_angle = 0;
 	float body_angle = 90;
+	bool game_over = false;
 
 	float cosDegrees(float degrees);
 	float sinDegrees(float degrees);
@@ -64,6 +65,8 @@ public:
 	//this should be called every "frame" when
 	//gravity should act
 	void gravity();
+
+	void checkGameOver();
 };
 
 #endif
