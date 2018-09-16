@@ -44,11 +44,19 @@ float Person::sinDegrees(int degrees) {
 }
 
 void Person::updatePosition(int angle_increase) {
+	//updates foot angle relatively to pedal
 	this->foot_angle += angle_increase;
 	//may be moving forward or backward
 	while (this->foot_angle < 0)
 		this->foot_angle += 360;
 	this->foot_angle = this->foot_angle % 360;
+
+	//updates body angle simulating inertia.
+	//If person moves forward the angle increases.
+	//The angle decreases otherwise.
+	//2 indicates the "speed proportion"
+	this->body_angle -= angle_increase / 2;
+	this->body_angle = this->body_angle % 360;
 
 	this->actual = this->initial;
 
@@ -68,4 +76,8 @@ void Person::updatePosition(int angle_increase) {
 	this->actual.knee[1] = sqrt(pow(calf_height,2) - pow(
 				this->actual.ankle[0] - this->actual.knee[0] ,2)) +
 				this->actual.ankle[1];
+}
+
+int Person::getBodyAngle() {
+	return this->body_angle;
 }

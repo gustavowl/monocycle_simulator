@@ -8,10 +8,12 @@ void controllerReadCommands(unsigned char key, int x, int y) {
 	if (key == 'd') {
 		//printf("Move forward\n");
 		gambiarra->updatePosition(-10);
+		printf("Body angle: %i\n", gambiarra->getBodyAngle());
 	}
 	if (key == 'a') {
 		//printf("Move backwards\n");
 		gambiarra->updatePosition(10);
+		printf("Body angle: %i\n", gambiarra->getBodyAngle());
 	}
 	if (key == 'l')
 		printf("Balance forward\n");

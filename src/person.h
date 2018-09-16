@@ -41,6 +41,7 @@ private:
 	} initial, actual;
 
 	int foot_angle = 0;
+	int body_angle = 90;
 
 	float cosDegrees(int degrees);
 	float sinDegrees(int degrees);
@@ -54,6 +55,10 @@ public:
 	float* getArticulations(int *size);
 
 	void updatePosition(int angle_increase);
+
+	//will be used for rotation
+	//returns body angle with respect to y-axis
+	int getBodyAngle();
 };
 
 #endif
