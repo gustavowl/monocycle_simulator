@@ -9,15 +9,15 @@
 #define FHEIGHT 4
 #define FRONT 5
 
-Person gambiarra;
+Person* gambiarra = new Person();
 
 Render::Render() {
 	//TODO
 }
 
-Render::Render(Person p) {
-	this->person = p;
-	gambiarra = p;
+Render::Render(Person* p) {
+	this->person = *p;
+	//gambiarra = p;
 }
 
 Render::~Render() {
@@ -130,7 +130,7 @@ void drawThigh(float* pos, int size) {
 
 void renderPerson() {
 	int size;
-	float* vec = gambiarra.getArticulations(&size);
+	float* vec = gambiarra->getArticulations(&size);
 	/*for (int i = 0; i < size; i++) {
 		printf("%f, ", vec[i]);
 	}
@@ -177,7 +177,7 @@ void renderDisplay() {
 int time = 0;
 void timer() {
 	if (++time == 2112 * 73) {
-		gambiarra.updatePosition(-15);
+		//gambiarra.updatePosition(-15);
 
 		glutPostRedisplay();
 		time = 0;
