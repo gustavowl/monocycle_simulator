@@ -112,3 +112,10 @@ void Person::checkGameOver() {
 	this->game_over = this->body_angle >= 180 ||
 		this->body_angle <= 0;
 }
+
+void Person::restart() {
+	if(this->game_over) {
+		this->game_over = false;
+		this->body_angle = 90.0;
+	}
+}

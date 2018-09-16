@@ -67,6 +67,7 @@ public:
 	void gravity();
 
 	void checkGameOver();
+	void restart();
 };
 
 #endif

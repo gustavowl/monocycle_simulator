@@ -21,6 +21,10 @@ void controllerReadCommands(unsigned char key, int x, int y) {
 		//printf("Balance backwards\n");
 		gambiarra->updateBodyAngle(5);
 	}
+	if (key == 'r') {
+		//restart game
+		gambiarra->restart();
+	}
 	//printf("=========================\n");
 	glutPostRedisplay();	
 }
