@@ -55,6 +55,7 @@ public:
 	float* getArticulations(int *size);
 
 	void updatePosition(int angle_increase);
+	void updateBodyAngle(int angle_increase);
 
 	//will be used for rotation
 	//returns body angle with respect to y-axis

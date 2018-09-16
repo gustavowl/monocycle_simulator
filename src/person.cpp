@@ -78,6 +78,10 @@ void Person::updatePosition(int angle_increase) {
 				this->actual.ankle[1];
 }
 
+void Person::updateBodyAngle(int angle_increase) {
+	this->body_angle += angle_increase;
+}
+
 int Person::getBodyAngle() {
 	return this->body_angle;
 }
