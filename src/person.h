@@ -2,6 +2,8 @@
 #define _PERSON_H_
 
 #include <string.h>
+#include <math.h>
+#define PI 3.1415926535897932
 
 #define PERSON_LEFT 0
 #define PERSON_RIGHT 1
@@ -26,14 +28,22 @@
 #define HIPY 10
 #define HIPZ 11
 
+
 class Person {
 private:
-	//store positions of articulations
-	float tiptoe[3];
-	float ankle[3];
-	float knee[3];
-	float hip[3];
-	float shoulder[3];
+	struct articulations {
+		//store positions of articulations
+		float tiptoe[3];
+		float ankle[3];
+		float knee[3];
+		float hip[3];
+		float shoulder[3];
+	} initial, actual;
+
+	int foot_angle = 0;
+
+	float cosDegrees(int degrees);
+	float sinDegrees(int degrees);
 
 public:
 	Person();
@@ -43,6 +53,7 @@ public:
 	//do not forget to delete array
 	float* getArticulations(int *size);
 
+	void updatePosition(int angle_increase);
 };
 
 #endif

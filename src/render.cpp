@@ -131,10 +131,10 @@ void drawThigh(float* pos, int size) {
 void renderPerson() {
 	int size;
 	float* vec = gambiarra.getArticulations(&size);
-	for (int i = 0; i < size; i++) {
+	/*for (int i = 0; i < size; i++) {
 		printf("%f, ", vec[i]);
 	}
-	printf("\n");
+	printf("\n");*/
 
 	glTranslatef(1, -1, 1);
 	drawFoot(vec, size);
@@ -174,6 +174,16 @@ void renderDisplay() {
 	glutSwapBuffers();
 }
 
+int time = 0;
+void timer() {
+	if (++time == 2112 * 73) {
+		gambiarra.updatePosition(15);
+
+		glutPostRedisplay();
+		time = 0;
+	}
+}
+
 void Render::start(int* argc, char **argv) {
 	glutInit(argc, argv);
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
@@ -182,6 +192,7 @@ void Render::start(int* argc, char **argv) {
 	glutCreateWindow("Monocycle Simulator");
 	glutKeyboardFunc(controllerReadCommands);
 	glutDisplayFunc(renderDisplay);
+	glutIdleFunc(timer);
 
 	/*GLfloat lightPos[4] = {0.0, 50.0, 50.0, 1.0};
 	glShadeModel(GL_FLAT);

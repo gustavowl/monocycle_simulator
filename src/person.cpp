@@ -1,18 +1,22 @@
 #include "person.h"
 
 Person::Person() {
-	this->tiptoe[0] = 0.0;
-	this->tiptoe[1] = -2.0;
-	this->tiptoe[2] = -1.0;
-	this->ankle[0] = -2.0;
-	this->ankle[1] = -2.0;
-	this->ankle[2] = -1.0;
-	this->knee[0] = 0.0;
-	this->knee[1] = 2.0;
-	this->knee[2] = -1.0;
-	this->hip[0] = -3.0;
-	this->hip[1] = 2.0;
-	this->hip[2] = -1.5;
+	//this->initial.tiptoe[0] = 0.0;
+	this->initial.tiptoe[0] = 1.0;
+	this->initial.tiptoe[1] = -2.0;
+	this->initial.tiptoe[2] = -1.0;
+	//this->initial.ankle[0] = -2.0;
+	this->initial.ankle[0] = -1.0;
+	this->initial.ankle[1] = -2.0;
+	this->initial.ankle[2] = -1.0;
+	this->initial.knee[0] = 0.0;
+	this->initial.knee[1] = 2.0;
+	this->initial.knee[2] = -1.0;
+	this->initial.hip[0] = -3.0;
+	this->initial.hip[1] = 2.0;
+	this->initial.hip[2] = -1.5;
+
+	updatePosition(0);
 }
 
 Person::~Person() {}
@@ -22,12 +26,45 @@ float* Person::getArticulations(int *size) {
 	float* ret = new float[*size];
 	
 	for (int i = 0; i < *size / 3; i++) {
-		ret[i] = this->tiptoe[i];
-		ret[i + 3] = this->ankle[i];
-		ret[i + 6] = this->knee[i];
-		ret[i + 9] = this->hip[i];
+		ret[i] = this->actual.tiptoe[i];
+		ret[i + 3] = this->actual.ankle[i];
+		ret[i + 6] = this->actual.knee[i];
+		ret[i + 9] = this->actual.hip[i];
 	}
 
 	return ret;
 }
 
+float Person::cosDegrees(int degrees) {
+	return cos(degrees * PI / 180);
+}
+
+float Person::sinDegrees(int degrees) {
+	return sin(degrees * PI / 180);
+}
+
+void Person::updatePosition(int angle_increase) {
+	//move forward
+	this->foot_angle += angle_increase;
+	//else move backward
+	//this->foot_angle -= angle_increase;
+	//while (this->foot_angle < 0) this->foot_angle += 360
+	this->foot_angle = this->foot_angle % 360;
+	/*this->tiptoe[TIPTOEX] = 0;
+	this->tiptoe[TIPTOEY] = 0;
+	this->ankle[ANKLEX] = 0;
+	this->ankle[ANKLEY] = 0;*/
+	this->actual = this->initial;
+
+	this->actual.tiptoe[0] += cosDegrees(this->foot_angle);
+	this->actual.tiptoe[1] += sinDegrees(this->foot_angle);
+	
+	this->actual.ankle[0] += cosDegrees(this->foot_angle);
+	this->actual.ankle[1] += sinDegrees(this->foot_angle);
+	
+	/*this->actual.knee[0] = 0.0;
+	this->actual.knee[1] = 2.0;
+	
+	this->actual.hip[0] = -3.0;
+	this->actual.hip[1] = 2.0;*/
+}
