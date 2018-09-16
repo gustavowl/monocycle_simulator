@@ -1,4 +1,6 @@
 #include "person.h"
+//FIXME: DELETE STDIO
+#include <stdio.h>
 
 Person::Person() {
 	//this->initial.tiptoe[0] = 0.0;
@@ -35,11 +37,11 @@ float* Person::getArticulations(int *size) {
 	return ret;
 }
 
-float Person::cosDegrees(int degrees) {
+float Person::cosDegrees(float degrees) {
 	return cos(degrees * PI / 180);
 }
 
-float Person::sinDegrees(int degrees) {
+float Person::sinDegrees(float degrees) {
 	return sin(degrees * PI / 180);
 }
 
@@ -55,8 +57,11 @@ void Person::updatePosition(int angle_increase) {
 	//If person moves forward the angle increases.
 	//The angle decreases otherwise.
 	//2 indicates the "speed proportion"
-	this->body_angle -= angle_increase / 2;
-	this->body_angle = this->body_angle % 360;
+	this->body_angle -= angle_increase / 2.0;
+	/*while(this->body_angle < 0)
+		this->body_angle += 360.0;
+	while(this->body_angle >= 360)
+		this->body_angle -= 360.0;*/
 
 	this->actual = this->initial;
 
@@ -78,10 +83,19 @@ void Person::updatePosition(int angle_increase) {
 				this->actual.ankle[1];
 }
 
-void Person::updateBodyAngle(int angle_increase) {
+void Person::updateBodyAngle(float angle_increase) {
+	printf("angle_incr: %f / ", angle_increase);
 	this->body_angle += angle_increase;
+	printf("update ba: %f\n", this->body_angle);
 }
 
-int Person::getBodyAngle() {
+float Person::getBodyAngle() {
 	return this->body_angle;
+}
+
+void Person::gravity() {
+	//printf("cos(%f) = %f\n", this->body_angle, cosDegrees(this->body_angle));
+	//printf("cos(%f) = %f\n", this->body_angle, cosDegrees(getBodyAngle()));
+	this->body_angle -= cosDegrees(this->body_angle);
+	//printf("%f\n================\n", getBodyAngle());
 }

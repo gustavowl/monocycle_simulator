@@ -41,10 +41,10 @@ private:
 	} initial, actual;
 
 	int foot_angle = 0;
-	int body_angle = 90;
+	float body_angle = 90;
 
-	float cosDegrees(int degrees);
-	float sinDegrees(int degrees);
+	float cosDegrees(float degrees);
+	float sinDegrees(float degrees);
 
 public:
 	Person();
@@ -55,11 +55,15 @@ public:
 	float* getArticulations(int *size);
 
 	void updatePosition(int angle_increase);
-	void updateBodyAngle(int angle_increase);
+	void updateBodyAngle(float angle_increase);
 
 	//will be used for rotation
 	//returns body angle with respect to y-axis
-	int getBodyAngle();
+	float getBodyAngle();
+
+	//this should be called every "frame" when
+	//gravity should act
+	void gravity();
 };
 
 #endif
