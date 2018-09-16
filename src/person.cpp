@@ -44,16 +44,12 @@ float Person::sinDegrees(int degrees) {
 }
 
 void Person::updatePosition(int angle_increase) {
-	//move forward
 	this->foot_angle += angle_increase;
-	//else move backward
-	//this->foot_angle -= angle_increase;
-	//while (this->foot_angle < 0) this->foot_angle += 360
+	//may be moving forward or backward
+	while (this->foot_angle < 0)
+		this->foot_angle += 360;
 	this->foot_angle = this->foot_angle % 360;
-	/*this->tiptoe[TIPTOEX] = 0;
-	this->tiptoe[TIPTOEY] = 0;
-	this->ankle[ANKLEX] = 0;
-	this->ankle[ANKLEY] = 0;*/
+
 	this->actual = this->initial;
 
 	this->actual.tiptoe[0] += cosDegrees(this->foot_angle);
@@ -62,9 +58,14 @@ void Person::updatePosition(int angle_increase) {
 	this->actual.ankle[0] += cosDegrees(this->foot_angle);
 	this->actual.ankle[1] += sinDegrees(this->foot_angle);
 	
-	/*this->actual.knee[0] = 0.0;
-	this->actual.knee[1] = 2.0;
-	
-	this->actual.hip[0] = -3.0;
-	this->actual.hip[1] = 2.0;*/
+	//calculate calf height using Pythagoras
+	float calf_height = sqrt(pow(this->initial.ankle[0] -
+					this->initial.knee[0], 2) +
+				pow(this->initial.ankle[1] -
+					this->initial.knee[1], 2)
+			);
+	//calculate knee height using Pythagoras
+	this->actual.knee[1] = sqrt(pow(calf_height,2) - pow(
+				this->actual.ankle[0] - this->actual.knee[0] ,2)) +
+				this->actual.ankle[1];
 }

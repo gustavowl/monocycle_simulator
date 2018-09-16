@@ -40,14 +40,14 @@ void drawParallelepiped(float* sqrBot, float* sqrTop) {
 		glVertex3f(sqrBot[LEFT], sqrBot[BHEIGHT], sqrBot[BACK]);
 		glVertex3f(sqrTop[LEFT], sqrTop[BHEIGHT], sqrTop[BACK]);
 		glVertex3f(sqrTop[RIGHT], sqrTop[BHEIGHT], sqrTop[BACK]);
-		glVertex3f(sqrBot[RIGHT], sqrBot[BHEIGHT], sqrBot[BACK]);
+		glVertex3f(sqrBot[RIGHT], sqrBot[BHEIGHT], sqrBot[BACK]);*/
 
 		//draw bottom clockwise: rbb, rbf, lbf, lbb
-		glColor3f(1, 1, 0); //yellow
+		//glColor3f(1, 1, 0); //yellow
 		glVertex3f(sqrBot[RIGHT], sqrBot[BHEIGHT], sqrBot[BACK]);
 		glVertex3f(sqrBot[RIGHT], sqrBot[FHEIGHT], sqrBot[FRONT]);
 		glVertex3f(sqrBot[LEFT], sqrBot[FHEIGHT], sqrBot[FRONT]);
-		glVertex3f(sqrBot[LEFT], sqrBot[BHEIGHT], sqrBot[BACK]);*/
+		glVertex3f(sqrBot[LEFT], sqrBot[BHEIGHT], sqrBot[BACK]);
 
 		//draw left clockwise: lbb, lbf, ltf, ltb
 		//glColor3f(0, 1, 0); //green
@@ -96,7 +96,7 @@ void drawFoot(float* pos, int size) {
 	glPopMatrix();
 }
 
-void drawKnee(float* pos, int size) {
+void drawCalf(float* pos, int size) {
 	glColor3f(0, 1, 0);
 	glPushMatrix();
 
@@ -137,9 +137,9 @@ void renderPerson() {
 	printf("\n");*/
 
 	glTranslatef(1, -1, 1);
-	drawFoot(vec, size);
-	drawKnee(vec, size);
 	drawThigh(vec, size);
+	drawCalf(vec, size);
+	drawFoot(vec, size);
 	
 	delete vec;
 }
@@ -177,7 +177,7 @@ void renderDisplay() {
 int time = 0;
 void timer() {
 	if (++time == 2112 * 73) {
-		gambiarra.updatePosition(15);
+		gambiarra.updatePosition(-15);
 
 		glutPostRedisplay();
 		time = 0;
