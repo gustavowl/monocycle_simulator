@@ -44,36 +44,36 @@ void drawParallelepiped(float* sqrBot, float* sqrTop) {
 
 		//draw bottom clockwise: rbb, rbf, lbf, lbb
 		//glColor3f(1, 1, 0); //yellow
-		glVertex3f(sqrBot[RIGHT], sqrBot[BHEIGHT], sqrBot[BACK]);
+		glVertex3f(sqrBot[RIGHT], sqrBot[FHEIGHT], sqrBot[BACK]);
 		glVertex3f(sqrBot[RIGHT], sqrBot[FHEIGHT], sqrBot[FRONT]);
-		glVertex3f(sqrBot[LEFT], sqrBot[FHEIGHT], sqrBot[FRONT]);
+		glVertex3f(sqrBot[LEFT], sqrBot[BHEIGHT], sqrBot[FRONT]);
 		glVertex3f(sqrBot[LEFT], sqrBot[BHEIGHT], sqrBot[BACK]);
 
 		//draw left clockwise: lbb, lbf, ltf, ltb
 		//glColor3f(0, 1, 0); //green
 		glVertex3f(sqrBot[LEFT], sqrBot[BHEIGHT], sqrBot[BACK]);
-		glVertex3f(sqrBot[LEFT], sqrBot[FHEIGHT], sqrBot[FRONT]);
-		glVertex3f(sqrTop[LEFT], sqrTop[FHEIGHT], sqrTop[FRONT]);
+		glVertex3f(sqrBot[LEFT], sqrBot[BHEIGHT], sqrBot[FRONT]);
+		glVertex3f(sqrTop[LEFT], sqrTop[BHEIGHT], sqrTop[FRONT]);
 		glVertex3f(sqrTop[LEFT], sqrTop[BHEIGHT], sqrTop[BACK]);
 
 		//draw right: rtf, rtb, rbb, rbf
 		//glColor3f(1, 1, 1); //white
 		glVertex3f(sqrTop[RIGHT], sqrTop[FHEIGHT], sqrTop[FRONT]);
-		glVertex3f(sqrTop[RIGHT], sqrTop[BHEIGHT], sqrTop[BACK]);
-		glVertex3f(sqrBot[RIGHT], sqrBot[BHEIGHT], sqrBot[BACK]);
+		glVertex3f(sqrTop[RIGHT], sqrTop[FHEIGHT], sqrTop[BACK]);
+		glVertex3f(sqrBot[RIGHT], sqrBot[FHEIGHT], sqrBot[BACK]);
 		glVertex3f(sqrBot[RIGHT], sqrBot[FHEIGHT], sqrBot[FRONT]);
 
 		//draw top clockwise: ltb, rtb, rtf, ltf
 		//glColor3f(0, 1, 1); //cyan
 		glVertex3f(sqrTop[LEFT], sqrTop[BHEIGHT], sqrTop[BACK]);
-		glVertex3f(sqrTop[RIGHT], sqrTop[BHEIGHT], sqrTop[BACK]);
+		glVertex3f(sqrTop[RIGHT], sqrTop[FHEIGHT], sqrTop[BACK]);
 		glVertex3f(sqrTop[RIGHT], sqrTop[FHEIGHT], sqrTop[FRONT]);
-		glVertex3f(sqrTop[LEFT], sqrTop[FHEIGHT], sqrTop[FRONT]);
+		glVertex3f(sqrTop[LEFT], sqrTop[BHEIGHT], sqrTop[FRONT]);
 
 		//draw front anti-clockwise: ltf, lbf, rbf, rtf
 		//glColor3f(0, 0, 1); //blue
-		glVertex3f(sqrTop[LEFT], sqrTop[FHEIGHT], sqrTop[FRONT]);
-		glVertex3f(sqrBot[LEFT], sqrBot[FHEIGHT], sqrBot[FRONT]);
+		glVertex3f(sqrTop[LEFT], sqrTop[BHEIGHT], sqrTop[FRONT]);
+		glVertex3f(sqrBot[LEFT], sqrBot[BHEIGHT], sqrBot[FRONT]);
 		glVertex3f(sqrBot[RIGHT], sqrBot[FHEIGHT], sqrBot[FRONT]);
 		glVertex3f(sqrTop[RIGHT], sqrTop[FHEIGHT], sqrTop[FRONT]);
 
@@ -137,9 +137,9 @@ void renderPerson() {
 	printf("\n");*/
 
 	glTranslatef(1, -1, 1);
-	drawThigh(vec, size);
-	drawCalf(vec, size);
 	drawFoot(vec, size);
+	drawCalf(vec, size);
+	drawThigh(vec, size);
 	
 	delete vec;
 }
