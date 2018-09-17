@@ -121,7 +121,7 @@ inline void renderPerson() {
 	}
 	printf("\n");*/
 
-	glTranslatef(1, -2, -2);
+	glTranslatef(1, -5, -5);
 	glRotatef(p->getBodyAngle() - 90, 0, 0, 1);
 	drawFoot(vec, size);
 	drawCalf(vec, size);

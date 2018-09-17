@@ -1,11 +1,20 @@
 inline void renderBuildings(int traveled_distance) {
+	float heights[] = {4, 2.5, 4, 1, 2, 4, 1.5, 2, 3.5, 2.5,
+		1, 1.5, 4, 2};
+
 	glColor3f(1, 1, 0);
-	for (int i = 0; i < 3; i++) {
+	for (int i = 0; i < 14; i++) {
 		glPushMatrix();
-		glScalef(1, 3, 1);
-		glTranslatef(i + 0.25 - traveled_distance / 20.0,
-				0.25, -2);
-		glutSolidCube(0.5);
+		glScalef(1, heights[i], 1);
+		//[-14, 14]
+		float shiftx = i*2 - traveled_distance / 20.0;
+		while(shiftx < -14)
+			shiftx += 28;
+		while(shiftx > 14)
+			shiftx -= 28;
+
+		glTranslatef(shiftx, 0.5, -5);
+		glutSolidCube(1);
 		glPopMatrix();
 	}
 }
