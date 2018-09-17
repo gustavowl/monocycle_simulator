@@ -141,7 +141,12 @@ inline void renderPerson() {
 	glRotatef(p->getBodyAngle() - 90, 0, 0, 1);
 	drawFoot(vec, size);
 	drawCalf(vec, size);
+	drawThigh(vec, size);
 	drawTorso(vec, size);
+
+	p->calculateSecondLegPos(vec);
+	drawFoot(vec, size);
+	drawCalf(vec, size);
 	drawThigh(vec, size);
 	
 	delete vec;

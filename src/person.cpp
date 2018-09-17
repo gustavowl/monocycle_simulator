@@ -62,7 +62,7 @@ void Person::updatePosition(int angle_increase) {
 		//If person moves forward the angle increases.
 		//The angle decreases otherwise.
 		//2 indicates the "speed proportion"
-		this->body_angle -= angle_increase / 2.0;
+		//this->body_angle -= angle_increase / 2.0;
 
 		//updates traveled distance
 		this->distance -= angle_increase / 10;
@@ -132,4 +132,28 @@ Person* Person::getInstance() {
 
 int Person::getDistance() {
 	return this->distance;
+}
+
+void Person::calculateSecondLegPos(float* articulations) {
+
+	articulations[TIPTOEX] = this->initial.tiptoe[0] + 
+		cosDegrees(this->foot_angle + 180);
+	articulations[TIPTOEY] = this->initial.tiptoe[1] +
+		sinDegrees(this->foot_angle + 180);
+
+	articulations[ANKLEX] = this->initial.ankle[0] +
+		cosDegrees(this->foot_angle + 180);
+	articulations[ANKLEY] = this->initial.ankle[1] +
+		sinDegrees(this->foot_angle + 180);
+	
+	//calculate calf height using Pythagoras
+	float calf_height = sqrt(pow(this->initial.ankle[0] -
+		this->initial.knee[0], 2) +
+		pow(this->initial.ankle[1] -
+		this->initial.knee[1], 2)
+		);
+	//calculate knee height using Pythagoras
+	articulations[KNEEY] = sqrt(pow(calf_height,2) - pow(
+		articulations[ANKLEX] - articulations[KNEEX] ,2)) +
+		articulations[ANKLEY];
 }

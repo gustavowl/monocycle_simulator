@@ -78,6 +78,9 @@ public:
 	static Person* getInstance();
 
 	int getDistance();
+
+	void calculateSecondLegPos(float* vec);
+
 };
 
 #endif
