@@ -112,6 +112,22 @@ inline void drawThigh(float* pos, int size) {
 	glPopMatrix();
 }
 
+inline void drawTorso(float* pos, int size) {
+	glColor3f(1, 1, 1);
+	glPushMatrix();
+
+	float bot[6] = {pos[SHOULDERX], pos[HIPY], pos[HIPZ] -
+		TORSO_DEPTH,
+		pos[HIPX], pos[HIPY], pos[KNEEZ]};
+	float top[6] = {pos[SHOULDERX], pos[SHOULDERY], pos[SHOULDERZ] -
+		TORSO_DEPTH,
+		pos[HIPX], pos[SHOULDERY], pos[SHOULDERZ]};
+
+	drawParallelepiped(bot, top);
+
+	glPopMatrix();
+}
+
 inline void renderPerson() {
 	int size;
 	Person* p = Person::getInstance();
@@ -125,6 +141,7 @@ inline void renderPerson() {
 	glRotatef(p->getBodyAngle() - 90, 0, 0, 1);
 	drawFoot(vec, size);
 	drawCalf(vec, size);
+	drawTorso(vec, size);
 	drawThigh(vec, size);
 	
 	delete vec;

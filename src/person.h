@@ -14,6 +14,7 @@
 #define CALF_WIDTH 1.0f
 #define THIGH_DEPTH 1.2f
 #define THIGH_HEIGHT 1.2f
+#define TORSO_DEPTH 2.5f
 
 #define TIPTOEX 0
 #define TIPTOEY 1
@@ -27,6 +28,9 @@
 #define HIPX 9
 #define HIPY 10
 #define HIPZ 11
+#define SHOULDERX 12
+#define SHOULDERY 13
+#define SHOULDERZ 14
 
 
 class Person {

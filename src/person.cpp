@@ -18,13 +18,16 @@ Person::Person() {
 	this->initial.knee[2] = -1.0;
 	this->initial.hip[0] = -3.0;
 	this->initial.hip[1] = 2.0;
-	this->initial.hip[2] = -1.5;
+	this->initial.hip[2] = -1.0;
+	this->initial.shoulder[0] = -4.0;
+	this->initial.shoulder[1] = 7.0;
+	this->initial.shoulder[2] = -1.0;
 
 	updatePosition(0);
 }
 
 float* Person::getArticulations(int *size) {
-	*size = 12;
+	*size = 15;
 	float* ret = new float[*size];
 	
 	for (int i = 0; i < *size / 3; i++) {
@@ -32,6 +35,7 @@ float* Person::getArticulations(int *size) {
 		ret[i + 3] = this->actual.ankle[i];
 		ret[i + 6] = this->actual.knee[i];
 		ret[i + 9] = this->actual.hip[i];
+		ret[i + 12] = this->actual.shoulder[i];
 	}
 
 	return ret;
