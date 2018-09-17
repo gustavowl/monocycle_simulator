@@ -3,19 +3,14 @@
 
 #include <GL/glut.h>
 #include <GL/glu.h>
-#include "person.h"
 #include "controller.h"
 #include "math.h"
-
-extern Person* gambiarra;
+#include "render_person.h"
 
 class Render {
-private:
-	Person person;
 
 public:
 	Render();
-	Render(Person* p);
 	~Render();
 
 	void start(int* argc, char **argv);

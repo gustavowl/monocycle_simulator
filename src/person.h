@@ -31,6 +31,8 @@
 
 class Person {
 private:
+	static Person* instance;
+
 	struct articulations {
 		//store positions of articulations
 		float tiptoe[3];
@@ -46,12 +48,10 @@ private:
 
 	float cosDegrees(float degrees);
 	float sinDegrees(float degrees);
+	
+	Person();
 
 public:
-	Person();
-	//todo: copy constructor? (contrutor de copia)
-	~Person();
-
 	//do not forget to delete array
 	float* getArticulations(int *size);
 
@@ -68,6 +68,8 @@ public:
 
 	void checkGameOver();
 	void restart();
+
+	static Person* getInstance();
 };
 
 #endif

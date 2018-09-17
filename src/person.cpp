@@ -2,6 +2,8 @@
 //FIXME: DELETE STDIO
 #include <stdio.h>
 
+Person* Person::instance = 0;
+
 Person::Person() {
 	//this->initial.tiptoe[0] = 0.0;
 	this->initial.tiptoe[0] = 1.0;
@@ -20,8 +22,6 @@ Person::Person() {
 
 	updatePosition(0);
 }
-
-Person::~Person() {}
 
 float* Person::getArticulations(int *size) {
 	*size = 12;
@@ -118,4 +118,10 @@ void Person::restart() {
 		this->game_over = false;
 		this->body_angle = 90.0;
 	}
+}
+
+Person* Person::getInstance() {
+	if (instance == 0)
+		instance = new Person();
+	return instance;
 }

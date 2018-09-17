@@ -7,8 +7,6 @@
 #include <stdio.h>
 #include "person.h"
 
-extern Person* gambiarra;
-
 void controllerReadCommands(unsigned char key, int x, int y);
 
 #endif
