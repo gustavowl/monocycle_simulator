@@ -59,11 +59,10 @@ void Person::updatePosition(int angle_increase) {
 		//The angle decreases otherwise.
 		//2 indicates the "speed proportion"
 		this->body_angle -= angle_increase / 2.0;
-		/*while(this->body_angle < 0)
-			this->body_angle += 360.0;
-		while(this->body_angle >= 360)
-			this->body_angle -= 360.0;*/
 
+		//updates traveled distance
+		this->distance -= angle_increase / 10;
+	
 		this->actual = this->initial;
 
 		this->actual.tiptoe[0] += cosDegrees(this->foot_angle);
@@ -117,6 +116,7 @@ void Person::restart() {
 	if(this->game_over) {
 		this->game_over = false;
 		this->body_angle = 90.0;
+		this->distance = 0;
 	}
 }
 
@@ -124,4 +124,8 @@ Person* Person::getInstance() {
 	if (instance == 0)
 		instance = new Person();
 	return instance;
+}
+
+int Person::getDistance() {
+	return this->distance;
 }

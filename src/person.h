@@ -48,6 +48,8 @@ private:
 
 	float cosDegrees(float degrees);
 	float sinDegrees(float degrees);
+
+	int distance = 0;
 	
 	Person();
 
@@ -70,6 +72,8 @@ public:
 	void restart();
 
 	static Person* getInstance();
+
+	int getDistance();
 };
 
 #endif

@@ -21,18 +21,8 @@ void renderDisplay() {
 
 	glColor3f(0.7f, 0.7f, 0.7f);
 
-	for (int i = -2; i <= 2; i++) {
-		for (int j = -2; j <= 2; j++) {
-			glPushMatrix();
-			//glScalef(1.0, i+3.0, 1.0);
-			//glScalef(1.0, random_scale_matrix[i+2][j+2], 1.0);
-			glTranslatef((double)i, 0.25, (double)j);
-			//glutWireCube(0.5);
-			glutSolidCube(0.5);
-			glPopMatrix();
-		}
-	}
-
+	Person* p = Person::getInstance();
+	renderBuildings(p->getDistance());
 	renderPerson();
 
 	glFlush();

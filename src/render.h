@@ -6,6 +6,7 @@
 #include "controller.h"
 #include "math.h"
 #include "render_person.h"
+#include "render_buildings.h"
 
 class Render {
 
