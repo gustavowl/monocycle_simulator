@@ -85,6 +85,9 @@ public:
 	//will be used for rotation
 	//returns body angle with respect to y-axis
 	float getBodyAngle();
+	float getFootAngle(){
+		return this->foot_angle;
+	};
 
 	//this should be called every "frame" when
 	//gravity should act

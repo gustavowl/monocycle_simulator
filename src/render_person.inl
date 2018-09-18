@@ -164,17 +164,36 @@ inline void drawHead(float* pos, int size) {
 	glPopMatrix();
 }
 
+inline void renderMono(Person* p){
+	GLUquadricObj* quadratic;
+	quadratic = gluNewQuadric();
+	gluQuadricNormals(quadratic, GLU_SMOOTH);
+	// Rodinha
+	float sz = 2.6;
+	glPushMatrix();
+		glTranslatef(-0.7, -0.6, 0);
+		glColor3f(0.7f, 0.7f, 0.7f);
+		gluDisk(quadratic,sz, sz+0.1, 32, 32);
+		for (int i=0; i<12; ++i){
+			glBegin(GL_LINES);
+				glVertex3f (0, 0, 0);
+		      	glVertex3f (sin(i+p->getFootAngle())*sz, cos(i+p->getFootAngle())*sz, 0);
+			glEnd();
+		}
+	glPopMatrix();
+}
+
 inline void renderPerson() {
 	int size;
 	Person* p = Person::getInstance();
 	float* vec = p->getArticulations(&size);
-	/*for (int i = 0; i < size; i++) {
-		printf("%f, ", vec[i]);
-	}
-	printf("\n");*/
 
+	
+	
+	//glPushMatrix();
 	glTranslatef(1, -5, -5);
 	glRotatef(p->getBodyAngle() - 90, 0, 0, 1);
+	
 	drawCalf(vec, size);
 	drawFoot(vec, size);
 	drawThigh(vec, size);
@@ -182,11 +201,19 @@ inline void renderPerson() {
 	drawTorso(vec, size);
 	drawHead(vec, size);
 	drawRightArm(vec, size);
+	//glPopMatrix();
 
+	glRotatef((-1)*(p->getBodyAngle() - 90), 0, 0, 1);
+	renderMono(p);	// Rodinha
+	glRotatef(p->getBodyAngle() - 90, 0, 0, 1);
+	// glPushMatrix();
+	// glTranslatef(1, -5, -5);
+	//glRotatef(p->getBodyAngle() - 90, 0, 0, 1);
 	p->calculateSecondLegPos(vec);
 	drawCalf(vec, size);
 	drawFoot(vec, size);
 	drawThigh(vec, size);
+	//glPopMatrix();
 	
 	delete vec;
 }
