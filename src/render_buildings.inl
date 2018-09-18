@@ -2,7 +2,7 @@ inline void renderBuildings(int traveled_distance) {
 	float heights[] = {4, 2.5, 4, 1, 2, 4, 1.5, 2, 3.5, 2.5,
 		1, 1.5, 4, 2};
 
-	glColor3f(1, 1, 0);
+	glColor3f(0.55, 0.55, 0.55);
 	for (int i = 0; i < 14; i++) {
 		glPushMatrix();
 		glScalef(1, heights[i], 1);
