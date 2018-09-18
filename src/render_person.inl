@@ -65,7 +65,7 @@ inline void drawParallelepiped(float* sqrBot, float* sqrTop) {
 }
 
 inline void drawFoot(float* pos, int size) {
-	glColor3f(1, 0, 0);
+	glColor3f(0.4, 0.2, 0);
 	glPushMatrix();
 
 	float bot[6] = {pos[ANKLEX], pos[ANKLEY], pos[ANKLEZ] - FOOT_DEPTH,
@@ -81,7 +81,7 @@ inline void drawFoot(float* pos, int size) {
 }
 
 inline void drawCalf(float* pos, int size) {
-	glColor3f(0, 1, 0);
+	glColor3f(1, 0.5, 0);
 	glPushMatrix();
 
 	float bot[6] = {pos[ANKLEX], pos[ANKLEY], pos[ANKLEZ] - CALF_DEPTH,
@@ -113,7 +113,7 @@ inline void drawThigh(float* pos, int size) {
 }
 
 inline void drawTorso(float* pos, int size) {
-	glColor3f(1, 1, 1);
+	glColor3f(1, 0, 0);
 	glPushMatrix();
 
 	float bot[6] = {pos[SHOULDERX], pos[HIPY], pos[HIPZ] -
@@ -129,7 +129,7 @@ inline void drawTorso(float* pos, int size) {
 }
 
 inline void drawLeftArm(float* pos, int size) {
-	glColor3f(1, 0, 1);
+	glColor3f(1, 0.5, 0);
 	glPushMatrix();
 	float bot[6] = {pos[LARMX], pos[LARMY], pos[LARMZ],
 		pos[LARMX] + ARM_WIDTH, pos[LARMY], pos[SHOULDERZ]};
@@ -141,7 +141,7 @@ inline void drawLeftArm(float* pos, int size) {
 }
 
 inline void drawRightArm(float* pos, int size) {
-	glColor3f(1, 0, 1);
+	glColor3f(1, 0.5, 0);
 	glPushMatrix();
 	float bot[6] = {pos[RARMX], pos[RARMY], pos[SHOULDERZ],
 		pos[RARMX] + ARM_WIDTH, pos[RARMY], pos[RARMZ]};
@@ -175,8 +175,8 @@ inline void renderPerson() {
 
 	glTranslatef(1, -5, -5);
 	glRotatef(p->getBodyAngle() - 90, 0, 0, 1);
-	drawFoot(vec, size);
 	drawCalf(vec, size);
+	drawFoot(vec, size);
 	drawThigh(vec, size);
 	drawLeftArm(vec, size);
 	drawTorso(vec, size);
@@ -184,8 +184,8 @@ inline void renderPerson() {
 	drawRightArm(vec, size);
 
 	p->calculateSecondLegPos(vec);
-	drawFoot(vec, size);
 	drawCalf(vec, size);
+	drawFoot(vec, size);
 	drawThigh(vec, size);
 	
 	delete vec;
