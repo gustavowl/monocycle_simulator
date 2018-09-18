@@ -9,6 +9,15 @@ Render::Render() {
 Render::~Render() {
 }
 
+void renderRoad() {
+	glColor3f(0, 0, 0);
+	glPushMatrix();
+	glScalef(30, 30, 0.5);
+	glTranslatef(0, -14/30.0, 0);
+	glutSolidCube(1);
+	glPopMatrix();
+}
+
 void renderDisplay() {
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -21,6 +30,7 @@ void renderDisplay() {
 
 	glColor3f(0.7f, 0.7f, 0.7f);
 
+	renderRoad();
 	Person* p = Person::getInstance();
 	renderBuildings(p->getDistance());
 	renderPerson();

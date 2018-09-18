@@ -62,7 +62,7 @@ void Person::updatePosition(int angle_increase) {
 		//If person moves forward the angle increases.
 		//The angle decreases otherwise.
 		//2 indicates the "speed proportion"
-		//this->body_angle -= angle_increase / 2.0;
+		this->body_angle -= angle_increase / 2.0;
 
 		//updates traveled distance
 		this->distance -= angle_increase / 10;
