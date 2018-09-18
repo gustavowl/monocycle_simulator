@@ -28,12 +28,18 @@ Person::Person() {
 	this->initial.larm[0] = -4.0;
 	this->initial.larm[1] = 6.0;
 	this->initial.larm[2] = -1.0 - 2*TORSO_DEPTH;
+	this->initial.neck[0] = -2.5;
+	this->initial.neck[1] = 7.0;
+	this->initial.neck[2] = -2.0;
+	this->initial.head[0] = -4.5;
+	this->initial.head[1] = 9.0;
+	this->initial.head[2] = -4.0;
 
 	updatePosition(0);
 }
 
 float* Person::getArticulations(int *size) {
-	*size = 21;
+	*size = 27;
 	float* ret = new float[*size];
 	
 	for (int i = 0; i < 3; i++) {
@@ -44,6 +50,8 @@ float* Person::getArticulations(int *size) {
 		ret[i + 12] = this->actual.shoulder[i];
 		ret[i + 15] = this->actual.rarm[i];
 		ret[i + 18] = this->actual.larm[i];
+		ret[i + 21] = this->actual.neck[i];
+		ret[i + 24] = this->actual.head[i];
 	}
 
 	return ret;

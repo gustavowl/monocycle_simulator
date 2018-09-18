@@ -39,6 +39,12 @@
 #define LARMX 18
 #define LARMY 19
 #define LARMZ 20
+#define NECKX 21
+#define NECKY 22
+#define NECKZ 23
+#define HEADX 24
+#define HEADY 25
+#define HEADZ 26
 
 
 class Person {
@@ -54,6 +60,8 @@ private:
 		float shoulder[3];
 		float rarm[3];
 		float larm[3];
+		float neck[3];
+		float head[3];
 	} initial, actual;
 
 	int foot_angle = 0;
