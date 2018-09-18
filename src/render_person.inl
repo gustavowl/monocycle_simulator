@@ -128,6 +128,30 @@ inline void drawTorso(float* pos, int size) {
 	glPopMatrix();
 }
 
+inline void drawLeftArm(float* pos, int size) {
+	glColor3f(1, 0, 1);
+	glPushMatrix();
+	float bot[6] = {pos[LARMX], pos[LARMY], pos[LARMZ],
+		pos[LARMX] + ARM_WIDTH, pos[LARMY], pos[SHOULDERZ]};
+	float top[6] = {pos[LARMX], pos[LARMY] + ARM_HEIGHT, pos[LARMZ],
+		pos[LARMX] + ARM_WIDTH, pos[LARMY] + ARM_HEIGHT, pos[SHOULDERZ]};
+
+	drawParallelepiped(bot, top);
+	glPopMatrix();
+}
+
+inline void drawRightArm(float* pos, int size) {
+	glColor3f(1, 0, 1);
+	glPushMatrix();
+	float bot[6] = {pos[RARMX], pos[RARMY], pos[SHOULDERZ],
+		pos[RARMX] + ARM_WIDTH, pos[RARMY], pos[RARMZ]};
+	float top[6] = {pos[RARMX], pos[RARMY] + ARM_HEIGHT, pos[SHOULDERZ],
+		pos[RARMX] + ARM_WIDTH, pos[RARMY] + ARM_HEIGHT, pos[RARMZ]};
+
+	drawParallelepiped(bot, top);
+	glPopMatrix();
+}
+
 inline void renderPerson() {
 	int size;
 	Person* p = Person::getInstance();
@@ -142,7 +166,9 @@ inline void renderPerson() {
 	drawFoot(vec, size);
 	drawCalf(vec, size);
 	drawThigh(vec, size);
+	drawLeftArm(vec, size);
 	drawTorso(vec, size);
+	drawRightArm(vec, size);
 
 	p->calculateSecondLegPos(vec);
 	drawFoot(vec, size);

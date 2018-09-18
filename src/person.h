@@ -15,6 +15,8 @@
 #define THIGH_DEPTH 1.2f
 #define THIGH_HEIGHT 1.2f
 #define TORSO_DEPTH 2.5f
+#define ARM_WIDTH 0.5f
+#define ARM_HEIGHT 0.5f
 
 #define TIPTOEX 0
 #define TIPTOEY 1
@@ -31,6 +33,12 @@
 #define SHOULDERX 12
 #define SHOULDERY 13
 #define SHOULDERZ 14
+#define RARMX 15
+#define RARMY 16
+#define RARMZ 17
+#define LARMX 18
+#define LARMY 19
+#define LARMZ 20
 
 
 class Person {
@@ -44,6 +52,8 @@ private:
 		float knee[3];
 		float hip[3];
 		float shoulder[3];
+		float rarm[3];
+		float larm[3];
 	} initial, actual;
 
 	int foot_angle = 0;

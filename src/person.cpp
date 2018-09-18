@@ -22,20 +22,28 @@ Person::Person() {
 	this->initial.shoulder[0] = -4.0;
 	this->initial.shoulder[1] = 7.0;
 	this->initial.shoulder[2] = -1.0;
+	this->initial.rarm[0] = -4.0;
+	this->initial.rarm[1] = 6.0;
+	this->initial.rarm[2] = -1.0 + TORSO_DEPTH;
+	this->initial.larm[0] = -4.0;
+	this->initial.larm[1] = 6.0;
+	this->initial.larm[2] = -1.0 - 2*TORSO_DEPTH;
 
 	updatePosition(0);
 }
 
 float* Person::getArticulations(int *size) {
-	*size = 15;
+	*size = 21;
 	float* ret = new float[*size];
 	
-	for (int i = 0; i < *size / 3; i++) {
+	for (int i = 0; i < 3; i++) {
 		ret[i] = this->actual.tiptoe[i];
 		ret[i + 3] = this->actual.ankle[i];
 		ret[i + 6] = this->actual.knee[i];
 		ret[i + 9] = this->actual.hip[i];
 		ret[i + 12] = this->actual.shoulder[i];
+		ret[i + 15] = this->actual.rarm[i];
+		ret[i + 18] = this->actual.larm[i];
 	}
 
 	return ret;
